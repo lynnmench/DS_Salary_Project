@@ -1,18 +1,23 @@
-#!/usr/bin/env python
-# coding: utf-8
 
-# Reference:
-# Omer Sakarya - Selenium Tutorial: Scraping Glassdoor.com in 10 Minutes
+""""
+Created: 24Jan2022
+Author: Lynn Menchaca
 
+Resource:
+Omer Sakarya - Selenium Tutorial: Scraping Glassdoor.com in 10 Minutes
+https://mersakarya.medium.com/selenium-tutorial-scraping-glassdoor-com-in-10-minutes-3d0915c6d905
+https://github.com/arapfaik/scraping-glassdoor-selenium
+
+Gathers jobs as a dataframe, scraped from Glassdoor
+""""
+    
 from selenium.common.exceptions import NoSuchElementException, ElementClickInterceptedException
 from selenium import webdriver
 import time
 import pandas as pd
 
 
-def get_jobs(keyword, num_jobs, verbose, path, slp_time):
-    
-    '''Gathers jobs as a dataframe, scraped from Glassdoor'''
+def get_jobs(keyword, num_jobs, verbose, path, slp_time):    
     
     #Initializing the webdriver
     options = webdriver.ChromeOptions()

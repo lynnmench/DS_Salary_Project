@@ -1,15 +1,15 @@
 
-""""
-Created: 24Jan2022
-Author: Lynn Menchaca
 
-Resource:
-Omer Sakarya - Selenium Tutorial: Scraping Glassdoor.com in 10 Minutes
-https://mersakarya.medium.com/selenium-tutorial-scraping-glassdoor-com-in-10-minutes-3d0915c6d905
-https://github.com/arapfaik/scraping-glassdoor-selenium
+#Created: 24Jan2022
+#Author: Lynn Menchaca
 
-Gathers jobs as a dataframe, scraped from Glassdoor
-""""
+#Resource:
+#Omer Sakarya - Selenium Tutorial: Scraping Glassdoor.com in 10 Minutes
+#https://mersakarya.medium.com/selenium-tutorial-scraping-glassdoor-com-in-10-minutes-3d0915c6d905
+#https://github.com/arapfaik/scraping-glassdoor-selenium
+
+#Gathers jobs as a dataframe, scraped from Glassdoor
+
     
 from selenium.common.exceptions import NoSuchElementException, ElementClickInterceptedException
 from selenium import webdriver
@@ -93,7 +93,7 @@ def get_jobs(keyword, num_jobs, verbose, path, slp_time):
             #Test for the "Sign Up" prompt and get rid of it.
             try:
                 #driver.find_element_by_class_name("selected").click()
-                driver.find_element_by_xpath('//*[@id="MainCol"]/div[1]/ul/li[1]').click()
+                driver.find_element_by_xpath('//*[@id="MainCol"]/div[1]/ul/li[1]').click()               
                 print("selected first job posting")
             except ElementClickInterceptedException:
                 print("failed first job posting")
@@ -104,8 +104,12 @@ def get_jobs(keyword, num_jobs, verbose, path, slp_time):
             try:
                 #Line from the orignial code did not work
                 #driver.find_element_by_class_name("ModalStyle__xBtn___29PT9").click()  #clicking to the X.
+                
+                #selector: JAModal > div > div.modal_main.jaCreateAccountModalWrapper.gdGrid > span
+                #class: SVGInline modal_closeIcon
 
                 driver.find_element_by_css_selector('[alt="Close"]').click()
+                #driver.find_element_by_xpath("//span[@class='SVGInline modal_closeIcon']").click
             except NoSuchElementException:
                 pass
 
@@ -183,7 +187,7 @@ def get_jobs(keyword, num_jobs, verbose, path, slp_time):
                         company_name = driver.find_element_by_xpath("//div[@class='css-xuk5ye e1tk4kwz5']").text
                         location = driver.find_element_by_xpath("//div[@class='css-56kyx5 e1tk4kwz1']").text
                         job_title = driver.find_element_by_xpath("//div[@class='css-1j389vi e1tk4kwz2']").text
-                        job_description = "Data Science"
+                        job_description = driver.find_element_by_xpath("//div[@class='jobDescriptionContent desc']").text
                         collected_successfully = True
                         #print("Company: " + company_name + ", location: " + location + ", Title: " + job_title + ", desc: " + job_description)
                     except:
